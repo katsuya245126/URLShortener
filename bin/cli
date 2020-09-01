@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+
+class CLI
+  def run
+    prompt_email
+    puts
+    options
+  end
+
+  def prompt_email
+    print "Enter your email: "
+    email = gets.chomp
+    @user = User.find_by(email: email)
+
+    raise 'Invalid email' if @user.nil? 
+
+    nil
+  end
+
+  def options
+    puts "Choose:\n 1. Create shortened URL\n 2. Visit shortened URL"
+    print "> "
+    choice = gets.chomp
+
+    case choice
+    when '1' then create
+    when '2' then visit
+    else
+      puts "Invalid choice"
+    end
+  end
+
+  def create
+    print "Enter your link: "
+    long_url = gets.chomp
+    shortened_url = ShortenedUrl.create_shortened_url(@user, long_url)
+
+    puts "Your shortened URL is: #{shortened_url.short_url}"
+  end
+
+  def visit 
+    print "Type in the short URL: "
+    short_url = gets.chomp
+
+    shortened_url = ShortenedUrl.find_by(short_url: short_url)
+
+    raise "No such url found" if shortened_url.nil?
+
+    Launchy.open(shortened_url.long_url)
+  end
+end
+
+CLI.new.run
