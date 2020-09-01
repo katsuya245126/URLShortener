@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -22,3 +23,8 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+=======
+# URLShortener
+
+Project for SQL > Active Record on App Academy
+>>>>>>> 87ef92ee2fb3a6cc4c881c3e332fe03a3fb82f3e
